@@ -1,6 +1,8 @@
 defmodule Sequence.Server do
   use GenServer
 
+  @vsn "0"
+
   #####
   # External API  
 
@@ -9,7 +11,8 @@ defmodule Sequence.Server do
   end
 
   def next_number do
-    GenServer.call __MODULE__, :next_number
+    with number = GenServer.call(__MODULE__, :next_number),
+    do: "The next number is #{number}"
   end
 
   def increment_number(delta) do
